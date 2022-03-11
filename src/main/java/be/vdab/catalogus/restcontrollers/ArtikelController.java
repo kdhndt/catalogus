@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/artikels")
 public class ArtikelController {
     private final ArtikelService artikelService;
 
@@ -16,7 +16,7 @@ public class ArtikelController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    void post(@RequestBody Artikel artikel) {
-        artikelService.create(artikel);
+    void post(@RequestBody String naam) {
+        artikelService.create(new Artikel(naam));
     }
 }

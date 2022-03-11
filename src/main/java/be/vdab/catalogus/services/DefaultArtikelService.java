@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 class DefaultArtikelService implements ArtikelService {
     private final ArtikelRepository artikelRepository;
+    //bean ter beschikking gesteld dankzij de Spring for RabbitMQ dependency
     private final AmqpTemplate template;
 
     DefaultArtikelService(ArtikelRepository artikelRepository, AmqpTemplate template) {
@@ -21,6 +22,9 @@ class DefaultArtikelService implements ArtikelService {
     @Override
     public void create(Artikel artikel) {
         artikelRepository.save(artikel);
-        template.convertAndSend("sportartikels", null, new ArtikelGemaakt(artikel));
+        //1. naam van de exchange naar waar het bericht wordt gestuurd op RabbitMQ
+        //2. geavanceerd gebruik
+        //3. object dat het bericht voorstelt en geconverteerd wordt naar JSON
+        template.convertAndSend("catalogus", null, new ArtikelGemaakt(artikel));
     }
 }
