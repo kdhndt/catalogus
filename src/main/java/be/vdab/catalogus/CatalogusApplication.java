@@ -4,7 +4,10 @@ import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
+//op regelmatige tijdstippen code uitvoeren
+@EnableScheduling
 @SpringBootApplication
 public class CatalogusApplication {
 

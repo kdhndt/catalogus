@@ -2,13 +2,23 @@ package be.vdab.catalogus.events;
 
 import be.vdab.catalogus.domain.Artikel;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "artikelsgemaakt")
 public class ArtikelGemaakt {
-    private final long id;
-    private final String naam;
+    @Id
+    private long id;
+    private String naam;
 
     public ArtikelGemaakt(Artikel artikel) {
         this.id = artikel.getId();
         this.naam = artikel.getNaam();
+    }
+
+    protected ArtikelGemaakt() {
     }
 
     public long getId() {
